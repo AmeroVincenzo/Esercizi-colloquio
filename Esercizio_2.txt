@@ -1,0 +1,9 @@
+#per poter eseguire automaticamente il comando scp, la macchina ha bisogno delle credenziali della macchina ricevente
+#per creare le credenziali usare il comando:
+#ssh-keygen
+#lo shell richiederà delle compilazioni, ma possono essere lasciate vuote
+#per condividere le chiavi con user@192.168.1.100:
+#ssh-copy-id user@192.168.1.100
+#questo permetterà di accedere alla macchina remota senza dover immettere le credenziali, e quindi permette a crontab di accedere in automatico
+#la linea di crontab vera e propria per eseguire il backup in /home/user e mandarlo alla macchina remota:
+0 23 * * 0 tar -cf /home/backup_user/Backup.tar /home/user; scp /home/backup_user/Backup.tar  user@192.168.1.100:/percorso/macchina/remota/ReceivedBackup.tar
